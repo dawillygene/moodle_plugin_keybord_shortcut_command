@@ -17,14 +17,14 @@
 /**
  * Keyboard Shortcuts Plugin - Version file
  *
- * @package    local_keyboard_shortcuts
+ * @package    local_moodle_plugin_keybord_shortcut_command
  * @copyright  2025 Your Name
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_keyboard_shortcuts';
+$plugin->component = 'local_moodle_plugin_keybord_shortcut_command';
 $plugin->version = 2025061400; // YYYYMMDDXX format
 $plugin->requires = 2024042200; // Requires Moodle 4.4+
 $plugin->maturity = MATURITY_ALPHA;

@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Hook to add keyboard shortcuts JavaScript to all Moodle pages
  */
-function local_keyboard_shortcuts_before_footer() {
+function local_moodle_plugin_keybord_shortcut_command_before_footer() {
     global $PAGE;
     
     // Only load on user-facing pages, not during installation/upgrade
@@ -36,7 +36,7 @@ function local_keyboard_shortcuts_before_footer() {
     }
     
     // Load the AMD module
-    $PAGE->requires->js_call_amd('local_keyboard_shortcuts/keyboard_shortcuts', 'init');
+    $PAGE->requires->js_call_amd('local_moodle_plugin_keybord_shortcut_command/keyboard_shortcuts', 'init');
 }
 
 /**
@@ -44,7 +44,7 @@ function local_keyboard_shortcuts_before_footer() {
  *
  * @param global_navigation $navigation
  */
-function local_keyboard_shortcuts_extend_navigation(global_navigation $navigation) {
+function local_moodle_plugin_keybord_shortcut_command_extend_navigation(global_navigation $navigation) {
     // This function can be used to add navigation elements if needed
     // Currently not implemented but reserved for future use
 }
@@ -55,7 +55,7 @@ function local_keyboard_shortcuts_extend_navigation(global_navigation $navigatio
  * @param settings_navigation $navigation
  * @param context $context
  */
-function local_keyboard_shortcuts_extend_settings_navigation(settings_navigation $navigation, context $context) {
+function local_moodle_plugin_keybord_shortcut_command_extend_settings_navigation(settings_navigation $navigation, context $context) {
     // This function can be used to add settings navigation if needed
     // Currently not implemented but reserved for future use
 }

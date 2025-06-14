@@ -17,7 +17,7 @@
 /**
  * Language strings for the Keyboard Shortcuts plugin
  *
- * @package    local_keyboard_shortcuts
+ * @package    local_moodle_plugin_keybord_shortcut_command
  * @copyright  2025 Your Name
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
