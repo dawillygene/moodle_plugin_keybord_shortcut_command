@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_moodle_plugin_keybord_shortcut_command';
-$plugin->version = 2025061402; // Final completed version - YYYYMMDDXX format
+$plugin->version = 2025061404; // Updated version with overlay positioning fix - YYYYMMDDXX format
 $plugin->requires = 2024042200; // Requires Moodle 4.4+
 $plugin->maturity = MATURITY_STABLE; // Production ready - all testing completed
-$plugin->release = '1.0.0'; // Final release version - project completed
+$plugin->release = '1.0.2'; // Updated release with overlay fix

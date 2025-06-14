@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Shortcuts Help Overlay Fix Test</title>
+    <link rel="stylesheet" href="../styles/keyboard_shortcuts.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            line-height: 1.6;
+        }
+        
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .test-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            margin: 10px;
+            transition: background 0.2s ease;
+        }
+        
+        .test-button:hover {
+            background: #5a6fd8;
+        }
+        
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: 500;
+        }
+        
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status.info {
+            background: #cce7ff;
+            color: #0c5460;
+            border: 1px solid #a6d5fa;
+        }
+        
+        .instructions {
+            background: #fff3cd;
+            color: #856404;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #ffeaa7;
+            margin: 20px 0;
+        }
+        
+        .sample-content {
+            height: 200vh;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🎯 Keyboard Shortcuts Help Overlay Fix Test</h1>
+        
+        <div class="instructions">
+            <h3>🧪 Test Instructions</h3>
+            <ol>
+                <li><strong>Keyboard Test:</strong> Press <kbd>Alt + ?</kbd> to open the help overlay</li>
+                <li><strong>Button Test:</strong> Click the "Show Help Overlay" button below</li>
+                <li><strong>Positioning Check:</strong> Verify the overlay appears centered on screen</li>
+                <li><strong>Background Check:</strong> Confirm the overlay has a dark semi-transparent background</li>
+                <li><strong>Z-index Check:</strong> Ensure the overlay appears above all other content</li>
+                <li><strong>Close Test:</strong> Test closing with the X button or <kbd>Esc</kbd> key</li>
+            </ol>
+        </div>
+
+        <div class="status info">
+            <strong>ℹ️ Test Status:</strong> Ready to test keyboard shortcuts help overlay positioning
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <button class="test-button" onclick="showTestOverlay()">Show Help Overlay</button>
+            <button class="test-button" onclick="testKeyboardShortcut()">Simulate Alt+?</button>
+        </div>
+
+        <div class="sample-content">
+            <h2>Sample Page Content</h2>
+            <p>This is sample content to test that the overlay appears above everything else.</p>
+            <p>The help overlay should appear centered on the screen with a dark background.</p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Mock Moodle configuration
+        window.M = {
+            cfg: {
+                wwwroot: ''
+            }
+        };
+
+        // Inline enhanced keyboard shortcuts for testing
+        function KeyboardShortcuts() {
+            this.isEnabled = true;
+            this.isHelpVisible = false;
+            this.showVisualFeedback = true;
+            this.shortcuts = {
+                'KeyH': { action: 'goHome', alt: true, description: 'Go to Home', icon: '🏠' },
+                'KeyD': { action: 'goDashboard', alt: true, description: 'Go to Dashboard', icon: '📊' },
+                'KeyC': { action: 'goCourses', alt: true, description: 'Go to Courses', icon: '📚' },
+                'KeyP': { action: 'goProfile', alt: true, description: 'Go to Profile', icon: '👤' },
+                'KeyS': { action: 'openSearch', alt: true, description: 'Open Search', icon: '🔍' },
+                'Slash': { action: 'showHelp', alt: true, shift: true, description: 'Show Help', icon: '❓' },
+            };
+            this.init();
+        }
+
+        KeyboardShortcuts.prototype.init = function() {
+            var self = this;
+            $(document).on('keydown', function(e) {
+                if (e.altKey && e.shiftKey && e.code === 'Slash') {
+                    e.preventDefault();
+                    self.showHelp();
+                }
+                if (e.key === 'Escape' && self.isHelpVisible) {
+                    self.hideHelp();
+                }
+            });
+        };
+
+        KeyboardShortcuts.prototype.showHelp = function() {
+            if (this.isHelpVisible) return;
+
+            var helpContent = this.buildEnhancedHelpContent();
+            var overlay = $('<div class="keyboard-shortcuts-overlay enhanced">')
+                .html(helpContent)
+                .appendTo('body')
+                .fadeIn(300);
+
+            overlay.find('.close-help').on('click', () => this.hideHelp());
+            overlay.on('click', (e) => {
+                if (e.target === overlay[0]) this.hideHelp();
+            });
+
+            this.isHelpVisible = true;
+            
+            // Update status
+            $('.status').removeClass('info').addClass('success')
+                .html('<strong>✅ Success:</strong> Help overlay is now visible and should be properly centered!');
+        };
+
+        KeyboardShortcuts.prototype.hideHelp = function() {
+            $('.keyboard-shortcuts-overlay').fadeOut(300, function() {
+                $(this).remove();
+            });
+            this.isHelpVisible = false;
+            
+            // Update status
+            $('.status').removeClass('success').addClass('info')
+                .html('<strong>ℹ️ Test Status:</strong> Help overlay closed. Ready for next test.');
+        };
+
+        KeyboardShortcuts.prototype.buildEnhancedHelpContent = function() {
+            return `
+                <div class="keyboard-shortcuts-help enhanced">
+                    <div class="help-header">
+                        <h3>⌨️ Keyboard Shortcuts</h3>
+                        <button class="close-help" aria-label="Close help">&times;</button>
+                    </div>
+                    <div class="help-body">
+                        <p class="help-intro">Navigate Moodle quickly with these keyboard shortcuts:</p>
+                        <div class="shortcuts-tabs">
+                            <button class="tab-btn active" data-tab="navigation">Navigation</button>
+                            <button class="tab-btn" data-tab="system">System</button>
+                        </div>
+                        <div class="shortcuts-grid">
+                            <div class="shortcut-category active" data-category="navigation">
+                                <h4>🧭 Navigation Shortcuts</h4>
+                                <div class="shortcut-item">
+                                    <div class="shortcut-keys">
+                                        <kbd>Alt + H</kbd>
+                                    </div>
+                                    <div class="shortcut-description">
+                                        <span class="shortcut-icon">🏠</span>
+                                        Go to Home
+                                    </div>
+                                </div>
+                                <div class="shortcut-item">
+                                    <div class="shortcut-keys">
+                                        <kbd>Alt + D</kbd>
+                                    </div>
+                                    <div class="shortcut-description">
+                                        <span class="shortcut-icon">📊</span>
+                                        Go to Dashboard
+                                    </div>
+                                </div>
+                                <div class="shortcut-item">
+                                    <div class="shortcut-keys">
+                                        <kbd>Alt + C</kbd>
+                                    </div>
+                                    <div class="shortcut-description">
+                                        <span class="shortcut-icon">📚</span>
+                                        Go to Courses
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="help-footer">
+                            <p class="help-tip">💡 <strong>Tip:</strong> Shortcuts are disabled when typing in form fields</p>
+                            <p class="help-note">Press <kbd>Esc</kbd> to close this help</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        };
+
+        // Initialize keyboard shortcuts
+        var keyboardShortcuts = new KeyboardShortcuts();
+
+        // Test functions
+        function showTestOverlay() {
+            keyboardShortcuts.showHelp();
+        }
+
+        function testKeyboardShortcut() {
+            // Simulate Alt+? keypress
+            var event = new KeyboardEvent('keydown', {
+                code: 'Slash',
+                key: '?',
+                altKey: true,
+                shiftKey: true,
+                bubbles: true
+            });
+            document.dispatchEvent(event);
+        }
+
+        // Show ready status
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('.status').html('<strong>✅ Ready:</strong> CSS fixes loaded. Test the help overlay positioning now!');
+            }, 500);
+        });
+    </script>
+</body>
+</html>

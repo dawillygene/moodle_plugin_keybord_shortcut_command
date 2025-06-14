@@ -24,7 +24,7 @@ define(['jquery', 'core/log', 'core/str', 'core/notification'], function($, Log,
             'KeyD': { action: 'goDashboard', alt: true, description: 'Go to Dashboard', icon: '📊' },
             'KeyC': { action: 'goCourses', alt: true, description: 'Go to Courses', icon: '📚' },
             'KeyP': { action: 'goProfile', alt: true, description: 'Go to Profile', icon: '👤' },
-            'KeyS': { action: 'openSearch', alt: true, description: 'Open Search', icon: '🔍' },
+            'KeyS': { action: 'openSearch', alt: true, description: 'Go to Search', icon: '🔍' },
             
             // Admin and Settings shortcuts
             'KeyA': { action: 'goAdmin', alt: true, description: 'Site Administration', icon: '⚙️' },
@@ -52,6 +52,9 @@ define(['jquery', 'core/log', 'core/str', 'core/notification'], function($, Log,
             // Help and documentation
             'Slash': { action: 'showHelp', alt: true, shift: true, description: 'Show Help', icon: '❓' },
             'KeyI': { action: 'showInfo', alt: true, description: 'Page Info', icon: 'ℹ️' },
+            
+            // Debug and fix shortcuts
+            'F12': { action: 'forceOverlayFix', alt: true, description: 'Force Overlay Fix', icon: '🔧' },
             
             // Accessibility shortcuts
             'KeyZ': { action: 'toggleHighContrast', alt: true, description: 'Toggle High Contrast', icon: '🎨' },
@@ -247,6 +250,11 @@ define(['jquery', 'core/log', 'core/str', 'core/notification'], function($, Log,
                     break;
                 case 'quickEnroll':
                     this.showQuickEnroll();
+                    break;
+                    
+                // Debug and fix actions
+                case 'forceOverlayFix':
+                    this.forceOverlayPositioning();
                     break;
                     
                 default:
@@ -553,6 +561,22 @@ define(['jquery', 'core/log', 'core/str', 'core/notification'], function($, Log,
         var helpContent = this.buildEnhancedHelpContent();
         var overlay = $('<div class="keyboard-shortcuts-overlay enhanced">')
             .html(helpContent)
+            .css({
+                'position': 'fixed',
+                'top': '0',
+                'left': '0',
+                'right': '0',
+                'bottom': '0',
+                'width': '100vw',
+                'height': '100vh',
+                'background': 'rgba(0, 0, 0, 0.8)',
+                'z-index': '999999',
+                'display': 'flex',
+                'align-items': 'center',
+                'justify-content': 'center',
+                'margin': '0',
+                'padding': '0'
+            })
             .appendTo('body')
             .fadeIn(300);
 
@@ -579,6 +603,32 @@ define(['jquery', 'core/log', 'core/str', 'core/notification'], function($, Log,
         });
 
         this.isHelpVisible = true;
+        
+        // Debug positioning after overlay is created
+        setTimeout(() => {
+            this.debugOverlayPositioning();
+            
+            // Force fix if positioning is incorrect
+            var overlayElement = $('.keyboard-shortcuts-overlay');
+            if (overlayElement.length > 0) {
+                var styles = window.getComputedStyle(overlayElement[0]);
+                var rect = overlayElement[0].getBoundingClientRect();
+                
+                // Check if overlay is properly positioned
+                var isProperlyPositioned = styles.position === 'fixed' && 
+                                         rect.top <= 5 && // Allow small margin for error
+                                         rect.left <= 5 &&
+                                         rect.width >= window.innerWidth - 10 &&
+                                         rect.height >= window.innerHeight - 10;
+                
+                if (!isProperlyPositioned) {
+                    console.log('⚠️ Overlay not properly positioned, applying force fix...');
+                    this.forceOverlayPositioning(overlayElement);
+                } else {
+                    console.log('✅ Overlay positioning is correct');
+                }
+            }
+        }, 100);
     };
 
     /**
@@ -753,7 +803,9 @@ define(['jquery', 'core/log', 'core/str', 'core/notification'], function($, Log,
         }, 300);
     };
 
-    // ... (continuing with existing methods and enhanced styles)
+    /**
+     * Hide help overlay
+     */
     KeyboardShortcuts.prototype.hideHelp = function() {
         $('.keyboard-shortcuts-overlay').fadeOut(300, function() {
             $(this).remove();
@@ -761,6 +813,9 @@ define(['jquery', 'core/log', 'core/str', 'core/notification'], function($, Log,
         this.isHelpVisible = false;
     };
 
+    /**
+     * Toggle help overlay
+     */
     KeyboardShortcuts.prototype.toggleHelp = function() {
         if (this.isHelpVisible) {
             this.hideHelp();
@@ -769,6 +824,9 @@ define(['jquery', 'core/log', 'core/str', 'core/notification'], function($, Log,
         }
     };
 
+    /**
+     * Check if keydown event matches shortcut modifiers
+     */
     KeyboardShortcuts.prototype.matchesModifiers = function(e, shortcut) {
         var altMatch = shortcut.alt ? e.altKey : !e.altKey;
         var ctrlMatch = shortcut.ctrl ? e.ctrlKey : !e.ctrlKey;
@@ -776,6 +834,9 @@ define(['jquery', 'core/log', 'core/str', 'core/notification'], function($, Log,
         return altMatch && ctrlMatch && shiftMatch;
     };
 
+    /**
+     * Get display name for a key shortcut
+     */
     KeyboardShortcuts.prototype.getKeyDisplayName = function(key, shortcut) {
         var parts = [];
         if (shortcut.alt) parts.push('Alt');
@@ -1019,13 +1080,28 @@ define(['jquery', 'core/log', 'core/str', 'core/notification'], function($, Log,
                 
                 /* Enhanced Help Overlay */
                 .keyboard-shortcuts-overlay.enhanced {
+                    position: fixed !important;
+                    top: 0 !important;
+                    left: 0 !important;
+                    width: 100% !important;
+                    height: 100% !important;
+                    background: rgba(0, 0, 0, 0.8) !important;
                     backdrop-filter: blur(4px);
+                    z-index: 10000 !important;
+                    display: flex !important;
+                    align-items: center !important;
+                    justify-content: center !important;
                 }
                 
                 .keyboard-shortcuts-help.enhanced {
+                    position: relative;
                     max-width: 600px;
+                    width: 90%;
+                    max-height: 90vh;
+                    background: white;
                     border-radius: 16px;
                     box-shadow: 0 16px 64px rgba(0,0,0,0.2);
+                    overflow: hidden;
                 }
                 
                 .help-intro {
@@ -1119,6 +1195,102 @@ define(['jquery', 'core/log', 'core/str', 'core/notification'], function($, Log,
         `;
         
         $('head').append(styles);
+    };
+
+    /**
+     * Debug overlay positioning
+     */
+    KeyboardShortcuts.prototype.debugOverlayPositioning = function() {
+        console.log('🔍 Debugging overlay positioning...');
+        
+        var overlay = $('.keyboard-shortcuts-overlay');
+        if (overlay.length > 0) {
+            var overlayStyles = window.getComputedStyle(overlay[0]);
+            console.log('📍 Overlay styles:', {
+                position: overlayStyles.position,
+                top: overlayStyles.top,
+                left: overlayStyles.left,
+                width: overlayStyles.width,
+                height: overlayStyles.height,
+                zIndex: overlayStyles.zIndex,
+                display: overlayStyles.display
+            });
+            
+            var overlayRect = overlay[0].getBoundingClientRect();
+            console.log('📏 Overlay bounds:', overlayRect);
+            
+            // Force positioning if not correct
+            if (overlayStyles.position !== 'fixed') {
+                console.log('⚠️ Fixing overlay position...');
+                overlay.css({
+                    'position': 'fixed !important',
+                    'top': '0 !important',
+                    'left': '0 !important',
+                    'width': '100vw !important',
+                    'height': '100vh !important',
+                    'z-index': '999999 !important'
+                });
+            }
+        } else {
+            console.log('❌ No overlay found');
+        }
+    };
+
+    /**
+     * Force overlay positioning fix - Ultimate solution
+     */
+    KeyboardShortcuts.prototype.forceOverlayPositioning = function(overlay) {
+        console.log('🔧 Force-fixing overlay positioning...');
+        
+        if (!overlay || overlay.length === 0) {
+            overlay = $('.keyboard-shortcuts-overlay');
+        }
+        
+        if (overlay.length > 0) {
+            // Apply ultra-aggressive inline styles
+            overlay.attr('style', `
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                width: 100vw !important;
+                height: 100vh !important;
+                background: rgba(0, 0, 0, 0.8) !important;
+                z-index: 999999 !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                transform: none !important;
+                clip: auto !important;
+                overflow: visible !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+            `);
+            
+            // Also fix the help content
+            var helpContent = overlay.find('.keyboard-shortcuts-help');
+            if (helpContent.length > 0) {
+                helpContent.attr('style', `
+                    position: relative !important;
+                    background: white !important;
+                    border-radius: 12px !important;
+                    width: 90% !important;
+                    max-width: 1000px !important;
+                    max-height: 90vh !important;
+                    margin: 0 auto !important;
+                    z-index: 999999 !important;
+                    transform: none !important;
+                `);
+            }
+            
+            console.log('✅ Force positioning applied');
+            this.showToast('🔧 Overlay positioning force-fixed!', 'success');
+        } else {
+            console.log('❌ No overlay found to fix');
+        }
     };
 
     // Return module interface

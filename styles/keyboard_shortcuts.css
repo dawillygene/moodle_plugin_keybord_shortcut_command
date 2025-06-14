@@ -10,20 +10,47 @@
    KEYBOARD SHORTCUTS HELP OVERLAY
    ============================================== */
 
-/* Main help overlay container */
-.keyboard-shortcuts-help {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px);
-    z-index: 10000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: fadeIn 0.3s ease-out;
+/* Main help overlay container - Maximum specificity for Moodle themes */
+body .keyboard-shortcuts-overlay,
+body .keyboard-shortcuts-overlay.enhanced,
+html body .keyboard-shortcuts-overlay,
+html body .keyboard-shortcuts-overlay.enhanced {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+    backdrop-filter: blur(5px) !important;
+    z-index: 999999 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    animation: fadeIn 0.3s ease-out !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    box-sizing: border-box !important;
+}
+
+/* Help content modal inside overlay - Maximum specificity */
+body .keyboard-shortcuts-help,
+body .keyboard-shortcuts-help.enhanced,
+html body .keyboard-shortcuts-help,
+html body .keyboard-shortcuts-help.enhanced {
+    position: relative !important;
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
+    width: 90% !important;
+    max-width: 1000px !important;
+    max-height: 90vh !important;
+    overflow: hidden !important;
+    animation: slideIn 0.3s ease-out !important;
+    margin: 0 !important;
+    z-index: 999999 !important;
 }
 
 /* Help content container */
@@ -98,7 +125,8 @@
    ============================================== */
 
 /* Tab navigation */
-.keyboard-shortcuts-tabs {
+.keyboard-shortcuts-tabs,
+.shortcuts-tabs {
     display: flex;
     background: #f8f9fa;
     border-bottom: 1px solid #dee2e6;
@@ -107,12 +135,14 @@
     list-style: none;
 }
 
-.keyboard-shortcuts-tab {
+.keyboard-shortcuts-tab,
+.shortcuts-tabs .tab-btn {
     flex: 1;
     text-align: center;
 }
 
-.keyboard-shortcuts-tab-button {
+.keyboard-shortcuts-tab-button,
+.tab-btn {
     display: block;
     width: 100%;
     padding: 15px 20px;
@@ -127,19 +157,22 @@
     border-bottom: 3px solid transparent;
 }
 
-.keyboard-shortcuts-tab-button:hover {
+.keyboard-shortcuts-tab-button:hover,
+.tab-btn:hover {
     background: #e9ecef;
     color: #495057;
 }
 
-.keyboard-shortcuts-tab-button.active {
+.keyboard-shortcuts-tab-button.active,
+.tab-btn.active {
     color: #667eea;
     background: white;
     border-bottom-color: #667eea;
 }
 
 /* Tab content */
-.keyboard-shortcuts-tab-content {
+.keyboard-shortcuts-tab-content,
+.help-body {
     padding: 30px;
     max-height: 60vh;
     overflow-y: auto;
@@ -153,12 +186,68 @@
     display: block;
 }
 
+/* Enhanced help content styles */
+.help-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid #dee2e6;
+    background: #f8f9fa;
+}
+
+.help-header h3 {
+    margin: 0;
+    color: #333;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.close-help {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+}
+
+.close-help:hover {
+    color: #333;
+}
+
+/* Shortcut categories */
+.shortcut-category {
+    display: none;
+    margin-bottom: 20px;
+}
+
+.shortcut-category.active {
+    display: block;
+}
+
+.shortcut-category h4 {
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 16px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #667eea;
+}
+
 /* ==============================================
    SHORTCUTS GRID
    ============================================== */
 
 /* Shortcuts grid layout */
-.keyboard-shortcuts-grid {
+.keyboard-shortcuts-grid,
+.shortcuts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 15px;
@@ -166,32 +255,63 @@
 }
 
 /* Individual shortcut item */
-.keyboard-shortcut-item {
+.keyboard-shortcut-item,
+.shortcut-item {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 12px 16px;
     background: #f8f9fa;
     border-radius: 8px;
     border-left: 4px solid #667eea;
     transition: all 0.2s ease;
+    border: 1px solid #e9ecef;
 }
 
-.keyboard-shortcut-item:hover {
+.keyboard-shortcut-item:hover,
+.shortcut-item:hover {
     background: #e9ecef;
     transform: translateX(4px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Shortcut icon */
-.keyboard-shortcut-icon {
-    font-size: 20px;
-    margin-right: 12px;
+/* Shortcut keys styling */
+.shortcut-keys,
+.keyboard-shortcut-keys {
     flex-shrink: 0;
 }
 
-/* Shortcut content */
+.shortcut-keys kbd,
+.keyboard-shortcut-keys,
+kbd {
+    background: white;
+    border: 2px solid #dee2e6;
+    border-radius: 6px;
+    color: #495057;
+    font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 8px;
+    box-shadow: 0 2px 0 #dee2e6;
+    display: inline-block;
+}
+
+/* Shortcut description */
+.shortcut-description,
 .keyboard-shortcut-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    color: #333;
     flex: 1;
+}
+
+.shortcut-icon,
+.keyboard-shortcut-icon {
+    font-size: 18px;
+    margin-right: 8px;
+    flex-shrink: 0;
 }
 
 .keyboard-shortcut-description {
@@ -199,6 +319,38 @@
     color: #333;
     margin: 0 0 4px 0;
     font-size: 14px;
+}
+
+/* Help footer and additional elements */
+.help-footer {
+    border-top: 1px solid #e9ecef;
+    padding: 20px 24px;
+    margin: 0;
+    background: #f8f9fa;
+}
+
+.help-tip {
+    background: #e8f4f8;
+    color: #0c5460;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    border-left: 4px solid #17a2b8;
+    font-size: 14px;
+}
+
+.help-note {
+    text-align: center;
+    color: #6c757d;
+    font-size: 14px;
+    margin: 0;
+}
+
+.help-intro {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 24px;
+    padding: 0 24px;
 }
 
 .keyboard-shortcut-keys {
@@ -546,8 +698,10 @@ html.smooth-scroll {
    ============================================== */
 
 .keyboard-shortcuts-tab-button:focus,
+.tab-btn:focus,
 .keyboard-shortcuts-modal-button:focus,
-.keyboard-shortcuts-help-close:focus {
+.keyboard-shortcuts-help-close:focus,
+.close-help:focus {
     outline: 2px solid #667eea;
     outline-offset: 2px;
 }
@@ -607,4 +761,85 @@ html.smooth-scroll {
 
 .keyboard-shortcuts-no-scroll {
     overflow: hidden;
+}
+
+/* ULTRA-AGGRESSIVE OVERLAY POSITIONING - FINAL FIX */
+/* This section uses the highest possible CSS specificity to override any Moodle theme conflicts */
+
+/* Multiple selector variations to ensure maximum CSS specificity */
+html body div.keyboard-shortcuts-overlay,
+html body .keyboard-shortcuts-overlay,
+body .keyboard-shortcuts-overlay,
+.keyboard-shortcuts-overlay,
+html body div.keyboard-shortcuts-overlay.enhanced,
+html body .keyboard-shortcuts-overlay.enhanced,
+body .keyboard-shortcuts-overlay.enhanced,
+.keyboard-shortcuts-overlay.enhanced {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    max-width: none !important;
+    max-height: none !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+    backdrop-filter: blur(5px) !important;
+    z-index: 999999 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    animation: fadeIn 0.3s ease-out !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    box-sizing: border-box !important;
+    transform: none !important;
+    clip: auto !important;
+    overflow: visible !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    float: none !important;
+    clear: none !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+}
+
+/* Ensure overlay is always on top of everything */
+html body div.keyboard-shortcuts-overlay *,
+html body .keyboard-shortcuts-overlay *,
+body .keyboard-shortcuts-overlay *,
+.keyboard-shortcuts-overlay * {
+    z-index: inherit !important;
+}
+
+/* Force the help content to be centered */
+html body .keyboard-shortcuts-help,
+body .keyboard-shortcuts-help,
+.keyboard-shortcuts-help,
+html body .keyboard-shortcuts-help.enhanced,
+body .keyboard-shortcuts-help.enhanced,
+.keyboard-shortcuts-help.enhanced {
+    position: relative !important;
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
+    width: 90% !important;
+    max-width: 1000px !important;
+    max-height: 90vh !important;
+    min-width: 320px !important;
+    overflow: hidden !important;
+    animation: slideIn 0.3s ease-out !important;
+    margin: 0 auto !important;
+    z-index: 999999 !important;
+    transform: none !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    float: none !important;
+    display: block !important;
 }
