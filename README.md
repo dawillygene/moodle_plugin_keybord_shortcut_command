@@ -5,9 +5,9 @@ A powerful Moodle local plugin that enhances user experience by adding intuitive
 ## 👨‍💻 Authors & Credits
 
 **Primary Developer**: ELIA WILLIAM MARIKI ([@dawillygene](https://github.com/dawillygene))  
-**Project Supervisor**: RAMADHANI ABDALLAH SAID  
+**Co-Developer**: RAMADHANI ABDALLAH SAID (Final Year Student)  
 **Project Type**: Final Year Project  
-**Institution**: [University/College Name]  
+**Institution**: College of Informatics and Virtual Education (CIVE), University of Dodoma  
 **Academic Year**: 2024/2025  
 
 ## 📄 License & Distribution
@@ -19,7 +19,7 @@ A powerful Moodle local plugin that enhances user experience by adding intuitive
 
 ## 🎓 Academic Project Information
 
-This plugin was developed as part of the final year project for **RAMADHANI ABDALLAH SAID**'s degree program. The project demonstrates:
+This plugin was developed as a collaborative final year project by **ELIA WILLIAM MARIKI** and **RAMADHANI ABDALLAH SAID** at the College of Informatics and Virtual Education (CIVE), University of Dodoma. The project demonstrates:
 
 - **Software Engineering Principles**: Modular design, version control, comprehensive testing
 - **Web Development Technologies**: JavaScript/AMD, PHP, CSS, HTML5
@@ -109,27 +109,10 @@ Administrators can configure:
 - Configure help overlay behavior
 - Set accessibility preferences
 
-## 🛠️ Development & Testing
+## 🛠️ Development & Technical Information
 
 ### For Developers
-This plugin includes comprehensive development and testing tools:
-
-### Testing Outside Moodle
-```bash
-# Open standalone test environment
-open tests/standalone_test.html
-
-# Test specific features
-open tests/debug_test.php        # Debug version testing
-open tests/final_test.php        # Comprehensive test suite
-```
-
-### Testing Inside Moodle
-1. Install plugin in development environment
-2. Navigate to any Moodle page
-3. Test keyboard shortcuts functionality
-4. Check browser console for debug information
-5. Use test pages: `/local/moodle_plugin_keybord_shortcut_command/tests/`
+This plugin follows Moodle development standards and uses AMD module architecture.
 
 ### Building AMD Modules
 ```bash
@@ -145,12 +128,6 @@ cp amd/src/*.js amd/build/
 - **Basic Version**: Core functionality only
 - **Debug Version**: Enhanced logging and debugging
 - **Enhanced Version**: Full UX features with animations
-
-### Development Tools Included
-- **Standalone Testing**: HTML test environment
-- **Plugin Detection**: Moodle integration testing
-- **Debug Console**: Real-time JavaScript debugging
-- **Performance Testing**: Load time and memory impact analysis
 
 ## 📋 Technical Specifications
 
@@ -176,8 +153,7 @@ local/moodle_plugin_keybord_shortcut_command/
 ├── lang/en/                      # Language strings
 ├── amd/src/                      # JavaScript source files
 ├── amd/build/                    # Minified production files
-├── tests/                        # Testing environment
-└── docs/                         # Additional documentation
+└── styles/                       # CSS stylesheets
 ```
 
 ## 📊 Version History & Changelog
@@ -230,8 +206,7 @@ local/moodle_plugin_keybord_shortcut_command/
 ## 📞 Support & Documentation
 
 ### Getting Help
-- **Documentation**: Check `/docs/` directory
-- **Testing**: Use comprehensive test suite in `/tests/`
+- **Documentation**: This README file
 - **Issues**: Report via project repository
 - **Community**: Moodle developer forums
 
@@ -253,8 +228,9 @@ This final year project demonstrates proficiency in:
 - **Educational Technology**: LMS enhancement, pedagogical considerations
 - **Open Source Development**: Community standards, collaborative practices
 
-**Supervisor Approval**: RAMADHANI ABDALLAH SAID  
-**Development Lead**: ELIA WILLIAM MARIKI (@dawillygene)  
+**Supervisor Approval**: Project Completed Successfully  
+**Co-Developers**: ELIA WILLIAM MARIKI (@dawillygene) & RAMADHANI ABDALLAH SAID  
+**Institution**: College of Informatics and Virtual Education (CIVE), University of Dodoma  
 **Project Classification**: Educational Technology Enhancement  
 **Contribution Type**: Open Source Software Development  
 
@@ -263,9 +239,10 @@ This final year project demonstrates proficiency in:
 ## 🌟 Acknowledgments
 
 Special thanks to:
+- **College of Informatics and Virtual Education (CIVE)**: University of Dodoma
 - **Moodle Community**: For excellent documentation and support
 - **Open Source Contributors**: For inspiration and best practices
-- **Academic Supervisors**: For guidance and project oversight
+- **Academic Institution**: For providing learning environment and resources
 - **Beta Testers**: For feedback and quality assurance
 
 ---
