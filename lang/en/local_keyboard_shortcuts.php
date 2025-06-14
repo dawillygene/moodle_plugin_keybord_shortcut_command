@@ -25,37 +25,13 @@
 $string['pluginname'] = 'Keyboard Shortcuts';
 $string['plugindescription'] = 'Adds keyboard shortcuts for quick navigation in Moodle';
 
-// Navigation shortcuts
+// Keyboard shortcuts
 $string['shortcut_home'] = 'Go to Home (Alt+H)';
 $string['shortcut_dashboard'] = 'Go to Dashboard (Alt+D)';
 $string['shortcut_courses'] = 'Go to Courses (Alt+C)';
 $string['shortcut_profile'] = 'Go to Profile (Alt+P)';
 $string['shortcut_search'] = 'Open Search (Alt+S)';
-$string['shortcut_calendar'] = 'View Calendar (Alt+T)';
-$string['shortcut_files'] = 'My Files (Alt+F)';
-
-// Admin and Settings shortcuts
-$string['shortcut_admin'] = 'Site Administration (Alt+A)';
-$string['shortcut_grades'] = 'Go to Grades (Alt+G)';
-$string['shortcut_notifications'] = 'View Notifications (Alt+N)';
-$string['shortcut_messages'] = 'View Messages (Alt+M)';
-$string['shortcut_bookmarks'] = 'Bookmarks/Badges (Alt+B)';
-$string['shortcut_reports'] = 'View Reports (Alt+R)';
-
-// Accessibility shortcuts
-$string['shortcut_high_contrast'] = 'Toggle High Contrast (Alt+Z)';
-$string['shortcut_increase_font'] = 'Increase Font Size (Alt+X)';
-$string['shortcut_decrease_font'] = 'Decrease Font Size (Alt+V)';
-$string['shortcut_scroll_up'] = 'Scroll Up (Alt+K)';
-$string['shortcut_scroll_down'] = 'Scroll Down (Alt+J)';
-$string['shortcut_scroll_top'] = 'Scroll to Top (Alt+U)';
-
-// System shortcuts
 $string['shortcut_logout'] = 'Logout (Alt+L)';
-$string['shortcut_edit_mode'] = 'Toggle Edit Mode (Alt+E)';
-$string['shortcut_quick_enroll'] = 'Quick Enroll (Alt+Q)';
-$string['shortcut_page_info'] = 'Page Info (Alt+I)';
-$string['shortcut_go_back'] = 'Go Back (Esc)';
 $string['shortcut_help'] = 'Show Help (Alt+?)';
 
 // Messages
@@ -65,14 +41,6 @@ $string['navigation_to'] = 'Navigating to {$a}';
 $string['help_title'] = 'Keyboard Shortcuts Help';
 $string['help_description'] = 'Use these keyboard shortcuts to navigate quickly through Moodle:';
 $string['help_close'] = 'Close Help (Esc)';
-$string['confirm_logout'] = 'Are you sure you want to logout?';
-$string['page_info_title'] = 'Page Information';
-$string['edit_mode_enabled'] = 'Edit mode enabled';
-$string['edit_mode_disabled'] = 'Edit mode disabled';
-$string['high_contrast_enabled'] = 'High contrast mode enabled';
-$string['high_contrast_disabled'] = 'High contrast mode disabled';
-$string['font_size_increased'] = 'Font size increased';
-$string['font_size_decreased'] = 'Font size decreased';
 
 // Settings
 $string['settings_enable'] = 'Enable keyboard shortcuts';

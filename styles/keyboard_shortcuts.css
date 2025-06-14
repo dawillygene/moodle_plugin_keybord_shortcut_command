@@ -1,0 +1,610 @@
+/**
+ * Enhanced CSS styles for Moodle Keyboard Shortcuts Plugin
+ * 
+ * @package    local_moodle_plugin_keybord_shortcut_command
+ * @copyright  2025 ELIA WILLIAM MARIKI (@dawillygene) and RAMADHANI ABDALLAH SAID
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+/* ==============================================
+   KEYBOARD SHORTCUTS HELP OVERLAY
+   ============================================== */
+
+/* Main help overlay container */
+.keyboard-shortcuts-help {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Help content container */
+.keyboard-shortcuts-help-content {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 1000px;
+    max-height: 90vh;
+    overflow: hidden;
+    position: relative;
+    animation: slideIn 0.3s ease-out;
+}
+
+/* Help header */
+.keyboard-shortcuts-help-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px 30px;
+    border-radius: 12px 12px 0 0;
+    position: relative;
+}
+
+.keyboard-shortcuts-help-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.keyboard-shortcuts-help-title::before {
+    content: "⌨️";
+    font-size: 28px;
+}
+
+.keyboard-shortcuts-help-subtitle {
+    margin: 8px 0 0 0;
+    opacity: 0.9;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/* Close button */
+.keyboard-shortcuts-help-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.keyboard-shortcuts-help-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+/* ==============================================
+   TABBED INTERFACE
+   ============================================== */
+
+/* Tab navigation */
+.keyboard-shortcuts-tabs {
+    display: flex;
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.keyboard-shortcuts-tab {
+    flex: 1;
+    text-align: center;
+}
+
+.keyboard-shortcuts-tab-button {
+    display: block;
+    width: 100%;
+    padding: 15px 20px;
+    border: none;
+    background: transparent;
+    color: #6c757d;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border-bottom: 3px solid transparent;
+}
+
+.keyboard-shortcuts-tab-button:hover {
+    background: #e9ecef;
+    color: #495057;
+}
+
+.keyboard-shortcuts-tab-button.active {
+    color: #667eea;
+    background: white;
+    border-bottom-color: #667eea;
+}
+
+/* Tab content */
+.keyboard-shortcuts-tab-content {
+    padding: 30px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.keyboard-shortcuts-tab-pane {
+    display: none;
+}
+
+.keyboard-shortcuts-tab-pane.active {
+    display: block;
+}
+
+/* ==============================================
+   SHORTCUTS GRID
+   ============================================== */
+
+/* Shortcuts grid layout */
+.keyboard-shortcuts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Individual shortcut item */
+.keyboard-shortcut-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+    transition: all 0.2s ease;
+}
+
+.keyboard-shortcut-item:hover {
+    background: #e9ecef;
+    transform: translateX(4px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Shortcut icon */
+.keyboard-shortcut-icon {
+    font-size: 20px;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+/* Shortcut content */
+.keyboard-shortcut-content {
+    flex: 1;
+}
+
+.keyboard-shortcut-description {
+    font-weight: 500;
+    color: #333;
+    margin: 0 0 4px 0;
+    font-size: 14px;
+}
+
+.keyboard-shortcut-keys {
+    background: #6c757d;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: 'Courier New', monospace;
+    display: inline-block;
+}
+
+/* ==============================================
+   VISUAL FEEDBACK SYSTEM
+   ============================================== */
+
+/* Toast notifications */
+.keyboard-shortcuts-toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #28a745;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 500;
+    max-width: 300px;
+}
+
+.keyboard-shortcuts-toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.keyboard-shortcuts-toast.info {
+    background: #17a2b8;
+}
+
+.keyboard-shortcuts-toast.warning {
+    background: #ffc107;
+    color: #212529;
+}
+
+.keyboard-shortcuts-toast.error {
+    background: #dc3545;
+}
+
+/* Activation indicator */
+.keyboard-shortcuts-indicator {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px 30px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    z-index: 9998;
+    opacity: 0;
+    animation: pulseIn 0.6s ease-out;
+}
+
+/* ==============================================
+   CONFIRMATION MODALS
+   ============================================== */
+
+/* Modal overlay */
+.keyboard-shortcuts-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.2s ease-out;
+}
+
+/* Modal content */
+.keyboard-shortcuts-modal-content {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 400px;
+    overflow: hidden;
+    animation: scaleIn 0.2s ease-out;
+}
+
+/* Modal header */
+.keyboard-shortcuts-modal-header {
+    padding: 20px 25px 15px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.keyboard-shortcuts-modal-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Modal body */
+.keyboard-shortcuts-modal-body {
+    padding: 20px 25px;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Modal footer */
+.keyboard-shortcuts-modal-footer {
+    padding: 15px 25px 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.keyboard-shortcuts-modal-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.keyboard-shortcuts-modal-button.primary {
+    background: #667eea;
+    color: white;
+}
+
+.keyboard-shortcuts-modal-button.primary:hover {
+    background: #5a6fd8;
+}
+
+.keyboard-shortcuts-modal-button.secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.keyboard-shortcuts-modal-button.secondary:hover {
+    background: #5a6268;
+}
+
+/* ==============================================
+   ACCESSIBILITY FEATURES
+   ============================================== */
+
+/* High contrast mode */
+.keyboard-shortcuts-high-contrast {
+    filter: contrast(200%) brightness(150%);
+}
+
+.keyboard-shortcuts-high-contrast .keyboard-shortcuts-help-content {
+    background: #000000;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+}
+
+.keyboard-shortcuts-high-contrast .keyboard-shortcut-item {
+    background: #333333;
+    color: #ffffff;
+    border-left-color: #ffffff;
+}
+
+.keyboard-shortcuts-high-contrast .keyboard-shortcuts-modal-content {
+    background: #000000;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+}
+
+/* Font size adjustments */
+.keyboard-shortcuts-large-font {
+    font-size: 120% !important;
+}
+
+.keyboard-shortcuts-large-font * {
+    font-size: inherit !important;
+}
+
+/* ==============================================
+   ANIMATIONS
+   ============================================== */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pulseIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* ==============================================
+   RESPONSIVE DESIGN
+   ============================================== */
+
+/* Tablet styles */
+@media (max-width: 768px) {
+    .keyboard-shortcuts-help-content {
+        width: 95%;
+        margin: 20px;
+    }
+    
+    .keyboard-shortcuts-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .keyboard-shortcuts-tab-content {
+        padding: 20px;
+        max-height: 50vh;
+    }
+    
+    .keyboard-shortcuts-help-header {
+        padding: 15px 20px;
+    }
+    
+    .keyboard-shortcuts-help-title {
+        font-size: 20px;
+    }
+}
+
+/* Mobile styles */
+@media (max-width: 480px) {
+    .keyboard-shortcuts-help-content {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+        margin: 0;
+    }
+    
+    .keyboard-shortcuts-help-header {
+        border-radius: 0;
+    }
+    
+    .keyboard-shortcuts-tabs {
+        flex-wrap: wrap;
+    }
+    
+    .keyboard-shortcuts-tab {
+        flex: 1 1 50%;
+    }
+    
+    .keyboard-shortcuts-tab-button {
+        padding: 12px 16px;
+        font-size: 13px;
+    }
+    
+    .keyboard-shortcuts-tab-content {
+        padding: 15px;
+        max-height: calc(100vh - 200px);
+    }
+    
+    .keyboard-shortcut-item {
+        padding: 10px 12px;
+    }
+    
+    .keyboard-shortcuts-toast {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+    
+    .keyboard-shortcuts-modal-content {
+        width: 95%;
+        margin: 10px;
+    }
+}
+
+/* ==============================================
+   SMOOTH SCROLLING
+   ============================================== */
+
+html.smooth-scroll {
+    scroll-behavior: smooth;
+}
+
+/* ==============================================
+   PRINT STYLES
+   ============================================== */
+
+@media print {
+    .keyboard-shortcuts-help,
+    .keyboard-shortcuts-toast,
+    .keyboard-shortcuts-modal,
+    .keyboard-shortcuts-indicator {
+        display: none !important;
+    }
+}
+
+/* ==============================================
+   FOCUS STYLES FOR ACCESSIBILITY
+   ============================================== */
+
+.keyboard-shortcuts-tab-button:focus,
+.keyboard-shortcuts-modal-button:focus,
+.keyboard-shortcuts-help-close:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* ==============================================
+   LOADING STATES
+   ============================================== */
+
+.keyboard-shortcuts-loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.keyboard-shortcuts-loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #667eea;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* ==============================================
+   UTILITY CLASSES
+   ============================================== */
+
+.keyboard-shortcuts-hidden {
+    display: none !important;
+}
+
+.keyboard-shortcuts-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.keyboard-shortcuts-no-scroll {
+    overflow: hidden;
+}

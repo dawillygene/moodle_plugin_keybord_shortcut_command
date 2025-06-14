@@ -35,8 +35,21 @@ function local_moodle_plugin_keybord_shortcut_command_before_footer() {
         return;
     }
     
-    // Load the AMD module
-    $PAGE->requires->js_call_amd('local_moodle_plugin_keybord_shortcut_command/keyboard_shortcuts', 'init');
+    // Load the enhanced AMD module only
+    $PAGE->requires->js_call_amd('local_moodle_plugin_keybord_shortcut_command/keyboard_shortcuts_enhanced', 'init');
+}
+
+/**
+ * Add CSS link to page head - working solution
+ */
+function local_moodle_plugin_keybord_shortcut_command_before_standard_head_html() {
+    // Only load on user-facing pages, not during installation/upgrade
+    if (during_initial_install() || moodle_needs_upgrading()) {
+        return '';
+    }
+    
+    // Return a simple CSS link - this works without issues
+    return '<link rel="stylesheet" type="text/css" href="/local/moodle_plugin_keybord_shortcut_command/styles/keyboard_shortcuts.css" />';
 }
 
 /**
