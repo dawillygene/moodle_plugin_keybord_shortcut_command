@@ -3,7 +3,7 @@
  * 
  * This module provides keyboard shortcuts for quick navigation within Moodle.
  * 
- * @module     local_keyboard_shortcuts/keyboard_shortcuts
+ * @module     local_moodle_plugin_keybord_shortcut_command/keyboard_shortcuts
  * @copyright  2025 Your Name
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

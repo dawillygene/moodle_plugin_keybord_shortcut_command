@@ -1,6 +1,8 @@
 <?php
 // Simple test script to check if Moodle recognizes our plugin
 
+define('CLI_SCRIPT', true);
+
 // Change to Moodle directory
 chdir('/var/www/html/moodle');
 
@@ -21,7 +23,7 @@ if (isset($plugins['local'])) {
         if ($pluginname === 'moodle_plugin_keybord_shortcut_command') {
             echo "  ✅ Our plugin is detected!\n";
             echo "  Version: {$plugin->versiondisk}\n";
-            echo "  Status: " . ($plugin->is_installed() ? 'Installed' : 'Not installed') . "\n";
+            echo "  Status: " . ($plugin->is_enabled() ? 'Enabled' : 'Disabled') . "\n";
         }
     }
 } else {
