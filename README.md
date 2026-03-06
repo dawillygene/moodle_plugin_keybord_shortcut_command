@@ -4,11 +4,8 @@ A powerful Moodle local plugin that enhances user experience by adding intuitive
 
 ## 👨‍💻 Authors & Credits
 
-**Primary Developer**: ELIA WILLIAM MARIKI ([@dawillygene](https://github.com/dawillygene))  
-**Co-Developer**: RAMADHANI ABDALLAH SAID (Final Year Student)  
-**Project Type**: Final Year Project  
-**Institution**: College of Informatics and Virtual Education (CIVE), University of Dodoma  
-**Academic Year**: 2024/2025  
+**Primary Developer**: DawillyGene ([@dawillygene](https://github.com/dawillygene))  
+
 
 ## 📄 License & Distribution
 
@@ -19,7 +16,6 @@ A powerful Moodle local plugin that enhances user experience by adding intuitive
 
 ## 🎓 Academic Project Information
 
-This plugin was developed as a collaborative final year project by **ELIA WILLIAM MARIKI** and **RAMADHANI ABDALLAH SAID** at the College of Informatics and Virtual Education (CIVE), University of Dodoma. The project demonstrates:
 
 - **Software Engineering Principles**: Modular design, version control, comprehensive testing
 - **Web Development Technologies**: JavaScript/AMD, PHP, CSS, HTML5
